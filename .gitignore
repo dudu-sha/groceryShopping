@@ -1,7 +1,8 @@
 client/node_modules/
 server/node_modules/
-.client/expo/
-.expo-shared/
+client/expo/
+client/yarn-error.log
+server/yarn-error.log
 assets/
 *.json
 npm-debug.*
