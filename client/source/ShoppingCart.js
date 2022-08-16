@@ -64,7 +64,7 @@ const Cart = () => {
           onPress={()=>{addCart(item)}}
           style={styles.btn}
         >
-          <Text style={{ fontSize: 18,color:'white' }}>Check-out</Text>
+          <Text style={{ fontSize: 18,color:'white' }}>Order</Text>
         </TouchableOpacity >
       </View>
       <View style={styles.floating}>

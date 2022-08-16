@@ -88,8 +88,9 @@ const LoginScreen =({navigation}) => {
       {/* <EvilIcons name="cart" size={150} color="#BCAAA4" /> */}
       {/* <Icon name="cart-sharp" size="120" color="black" /> */}
       {/* <View style={{height:140,width:140,borderRadius:70,alignItems:'center',justifyContent:"center",marginBottom:20}}> */}
-      <Icon name="lock-closed" size={100} color={"#d6c3c3"} />
-      <Text style={{fontSize:36,color:'black'}}>Sign-in</Text>
+      <Icon name="log-in-outline" size={100} color={"black"} style={{marginTop:20}} />
+      {/* <Text>{userprofile[0].token}</Text> */}
+      <Text style={{fontSize:36,color:'black',marginBottom:20,marginTop:10}}>Sign-in</Text>
 
       {/* </View> */}
       <View style={styles.insider}>
@@ -138,7 +139,7 @@ const LoginScreen =({navigation}) => {
           onPress={() => navigation.navigate("RecoverScreen")}
          
         >
-      <Text style={{alignSelf:'flex-end',marginTop:10,fontSize:16}}>forgot your password?</Text>
+      <Text style={{alignSelf:'flex-end',marginTop:10,fontSize:16,color:'black'}}>forgot your password?</Text>
             </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -189,16 +190,19 @@ const styles = StyleSheet.create({
   },
   insider: {
     flexDirection: "row",
-    paddingRight: 5,
+    paddingRight: 10,
+    
     alignItems: "center",
     height: 50,
-    width: WIDTH - 60,
-    backgroundColor:'#f9f9f9',
+    width: WIDTH - 40,
+    backgroundColor:'white',
+    elevation:2,
     // borderBottomColor: "#28282B",
     // borderBottomWidth: 1,
     margin: 10,
-    paddingLeft: -5,
-    borderRadius:12
+    paddingLeft: 10,
+    borderRadius:12,
+   
   },
 
   text: {
@@ -225,7 +229,7 @@ const styles = StyleSheet.create({
     marginLeft:180,
     backgroundColor:'#b89595',
     borderRadius: 15,
-   
+    elevation:10,
     alignItems: "center",
     justifyContent:'center'
   },
@@ -233,7 +237,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: 300,
     textAlign: "center",
-    paddingTop: 100,
+    paddingTop: 50,
     alignItems: "center",
   },
   btn2: {

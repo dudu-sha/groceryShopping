@@ -10,12 +10,14 @@ import React, { createContext, useReducer, useState, useEffect } from "react";
 
 
 import {
-  LOGIN
+  LOGIN,
+  SET_TOKEN
 
 } from "../Reducer/UserReducer";
 import axios from "axios";
 import UserReducer from "../Reducer/UserReducer";
 import { UserContext} from "../UserContext";
+import { AsyncStorage } from "react-native";
 
 
 // const initialState = {};
@@ -24,7 +26,10 @@ import { UserContext} from "../UserContext";
 export const UserProvider = ({ children }) => {
   const [userstate, dispatch] = useReducer(UserReducer, {
     
-    userprofile:[ ]});
+    userprofile:[ ],
+    token:''
+  
+  });
     const headers = {
         "Content-Type": "application/json",
         
@@ -33,7 +38,7 @@ export const UserProvider = ({ children }) => {
     const login = async (email,password) => {
         // console.log(password)
     const profile =  await  axios
-          .post("http://192.168.1.12:5000/api/auth", {
+          .post("http://192.168.1.10:5000/api/auth", {
             email,
             password
          
@@ -50,7 +55,7 @@ export const UserProvider = ({ children }) => {
       const register = async (name,email,role,password) => {
         console.log(name)
     const profile =  await  axios
-          .post("http://192.168.1.12:5000/api/users", {
+          .post("http://192.168.1.10:5000/api/users", {
             name:name,
             email:email,
             
@@ -61,12 +66,19 @@ export const UserProvider = ({ children }) => {
           .then((res) => console.log(res))
           .catch( e=>console.log(e));
       };
+      const setToken = async() =>{
+        dispatch({
+          type: SET_TOKEN,
+          payload: await AsyncStorage.getItem('UserToken'),
+        });
+      }
   return (
     <UserContext.Provider
       value={{
         userprofile: userstate.userprofile,
         login: login,
-        register 
+        register ,
+        setToken
  
       }}
     >

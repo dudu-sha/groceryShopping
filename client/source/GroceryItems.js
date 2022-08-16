@@ -11,6 +11,9 @@ import {
   Image,
   FlatList
 } from "react-native";
+import { Divider } from "react-native-elements";
+
+import { Icon } from "react-native-elements/dist/icons/Icon";
 import {GroceryContext}  from '../context/GroceryContext'
 // import { Badge } from "react-native-paper";
 // import { AntDesign } from "@expo/vector-icons";
@@ -24,7 +27,9 @@ const WIDTH = Math.round(Dimensions.get("window").width);
 const HEIGHT = Math.round(Dimensions.get("window").height);
 const ListItem = ({ item }) => {
   return (
+
     <View style={styles.item}>
+      <View style={{flexDirection:'row'}}>
       <Image
         source={{
           uri: item.avatar
@@ -32,10 +37,23 @@ const ListItem = ({ item }) => {
         style={styles.itemPhoto}
         resizeMode="cover"
       />
-      <Text style={styles.itemText}>{item.Price}</Text>
-      <Text style={styles.itemText}>hello</Text>
+      <View style={{fontSize:20,alignSelf:'flex-start',marginLeft:20}}>
+      <Text style={{fontSize:20}}>{item.product.charAt(0).toUpperCase() +  item.product.slice(1)}</Text>
+      <Text style={styles.itemText}>Price - {item.Price}</Text>
+      </View>
+      </View>
+      <TouchableOpacity
+          onPress={()=>{addCart(item)}}
+          style={styles.btn}
+        >
+          <Icon name='add-circle' size={30} color='#986868'/>
+        </TouchableOpacity >
     </View>
+
   );}
+  renderSectionHeader = ({ section }) => {
+    return <Text>{section.title}</Text>
+  }
 const GroceryItems= () => {
   const [visible, setVisible] = useState(true);
   const Showpopover = () => {
@@ -54,7 +72,7 @@ const GroceryItems= () => {
 
   
 
-  console.log(context.items);
+  // console.log(context.items);
   const f = context.cart.length;
   const cartnumber = context.cart.reduce((count, curItem) => {
     return count + curItem.quantity;
@@ -73,15 +91,14 @@ const GroceryItems= () => {
     for (var j in context.items) {
       if (context.items[j].cls === keys[i]) {
         pro.push({
-          List:[
-            {product: context.items[j].product,
+        
+            product: context.items[j].product,
           Price: context.items[j].Price,
           id: context.items[j]._id,
           title: context.items[j].cls,
           image:context.items[j].product,
-          avatar:'https://images.unsplash.com/photo-1580913428023-02c695666d61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=334&q=80',
-            }
-        ]
+                 avatar:'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YmFuYW5hfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+           
            });
       }
     }
@@ -102,7 +119,7 @@ console.log(ByClass[1])
       {/* <TouchableOpacity onPress={() => context.getItems()}>
         <Text>refresh</Text>
       </TouchableOpacity>  */}
-      {/*7 {context.cart.map(item=> <Text>{item.product}</Text>)} */}
+      {/* {context.items.map(item=> <Text>{item.Product}</Text>)}? */}
 
       <View
         style={{
@@ -115,27 +132,42 @@ console.log(ByClass[1])
        
         <SectionList
           sections={ByClass}
+          // renderSectionHeader={renderSectionHeader()}
+          //    renderItem={renderSection}
           renderSectionHeader={({ section }) => (
+            
             <Text style={styles.section}>{section.title.toUpperCase()}</Text>
+            
+
           )}
         
           renderItem={({ item }) => (
             
-            <View  >
-             <FlatList
-        horizontal
-        // numColumns={2}nb vc
-
-        data={item.List}
-        renderItem={({ item }) => <ListItem item={item} />}
-        showsHorizontalScrollIndicator={false}
+            <View style={{flex:1}} >
+              <View style={styles.item}>
+      <View style={{flexDirection:'row'}}>
+      <Image
+        source={{
+          uri: item.avatar
+        }}
+        style={styles.itemPhoto}
+        resizeMode="cover"
       />
-            <TouchableOpacity
+      <View style={{fontSize:18,alignSelf:'flex-start',marginLeft:20}}>
+      <Text style={{fontSize:18,color:'black'}}>{item.product.charAt(0).toUpperCase() +  item.product.slice(1)}</Text>
+      <Text style={styles.itemText}>Price - {item.Price}</Text>
+      </View>
+      </View>
+      <TouchableOpacity
           onPress={()=>{addCart(item)}}
           style={styles.btn}
         >
-          <Text style={{ fontSize: 18,color:'white' }}>Add</Text>
+          <Icon name='add-circle' size={30} color='#DACACA'/>
         </TouchableOpacity >
+    </View>
+
+      {/* <Divider style={{marginLeft:20,marginRight:20}}/> */}
+
           </View>
           )}
           keyExtractor={(item, index) => index}
@@ -170,29 +202,36 @@ const styles = StyleSheet.create({
     width: 70,
     borderRadius: 35,
     borderWidth: 1,
-    borderColor: "white",
+    // borderColor: "white",
+    
   },
   section: {
     flex: 1,
-    width: WIDTH - 20,
+    width: WIDTH-10,
     color:'black',
     fontSize: 20,
     // marginTop: 10,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#323232",
     padding: 10,
-    borderRadius: 1,
-   
+    borderRadius: 10,
+    marginTop:2,
+   elevation:1,
+   marginLeft:10,
+   color:'white'
   },
   item: {
+    flex:1,
     margin: 10,
-    
+    flexDirection:'row',
+    marginLeft:10,
+    justifyContent:'space-between'
    
    
   },
   itemPhoto: {
-    width: 100,
-    height: 120,
-    // borderRadius:50
+    width: 60,
+    height: 40,
+    borderRadius:20
     
    
   },
@@ -201,21 +240,13 @@ const styles = StyleSheet.create({
     
   },
   itemText:{
-    fontSize:18,
-    padding:5
+    fontSize:16,
+   paddingTop:5
   },
   btn: {
-    height: 25,
-    width: 50,
+  alignSelf:'flex-end'
     
-    textAlign: "center",
-    marginTop: 30,
     
-    backgroundColor:'#986868',
-    borderRadius: 5,
-   
-    alignItems: "center",
-    justifyContent:'center'
   },
 });
 export default GroceryItems;

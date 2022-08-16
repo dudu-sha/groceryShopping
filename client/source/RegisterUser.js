@@ -38,8 +38,8 @@ const RegisterUser = ({navigation}) => {
   });
   return (
     <View style={styles.container}>
-      <Icon name="person-circle" size={100} color={"#d6c3c3"} />
-      <Text style={{fontSize:36,color:'black'}}>Sign-Up</Text>
+      <Icon name="person-circle-outline" size={100} color={"black"} />
+      <Text style={{fontSize:36,color:'black',paddingBottom:20}}>Sign-Up</Text>
      
       <View style={styles.insider}>
         {/* <AntDesign style={styles.inside} name="phone" size={22} /> */}
@@ -123,16 +123,17 @@ const styles = StyleSheet.create({
   },
   insider: {
     flexDirection: "row",
-    paddingRight: 5,
+    // paddingRight: 10,
     alignItems: "center",
-    height: 45,
+    height: 50,
     width: WIDTH - 40,
-    borderColor: "#28282B",
-    backgroundColor:'#f9f9f9',
+    borderColor: "white",
+    backgroundColor:'white',
     // borderWidth: 1,
+    elevation:2,
     borderRadius:12,
     margin: 10,
-    paddingLeft: -5,
+    paddingHorizontal: 10,
   },
   btn: {
     height: 50,
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
     marginLeft:180,
     backgroundColor:'#b89595',
     borderRadius: 15,
-   
+    elevation:10,
     alignItems: "center",
     justifyContent:'center'
   },

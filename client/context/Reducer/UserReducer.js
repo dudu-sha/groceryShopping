@@ -32,7 +32,16 @@ console.log(action.payload)
        userprofile: [action.payload, ...state.userprofile],
          
       };
-   
+      case "SET_TOKEN":
+          
+
+
+                return {
+                ...state,
+
+                token: [action.payload, ...state.token],
+
+                };
   
     default:
       return state;
@@ -45,6 +54,7 @@ console.log(action.payload)
 
 
 export const LOGIN = "LOGIN";
+export const SET_TOKEN = "SET_TOKEN"
 
 
 export default UserReducer;

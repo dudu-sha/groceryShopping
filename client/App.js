@@ -14,6 +14,7 @@ import { UserProvider } from './context/Provider/UserProvider';
 import NavigationScreen from './source/Login_Register_navigation'
 
 import {GroceryContext}  from './context/GroceryContext'
+import { UserContext } from './context/UserContext';
 import LoginScreen from './source/LoginScreen'
 
 
@@ -21,10 +22,15 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   const context = useContext(GroceryContext)
+  const {userprofile}= useContext(UserContext)
   const { getItems } = useContext(GroceryContext);
+  // const {setToken} = useContext(UserContext)?
   const [token,setToken]=useState();
+  console.log('gt')
+  console.log(userprofile)
   useEffect(() => {
     setTimeout(async () => {
+      setToken()
      getItems()
     }, 1000);
   }, []);
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     
-    marginTop:30,
+  paddingTop:0,
     
   },
     container1: {

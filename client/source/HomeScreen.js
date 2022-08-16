@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { SliderBox } from "react-native-image-slider-box";
 import {StyleSheet , View,Text,SafeAreaView,ScrollView} from 'react-native'
 import FeaturedProducts from '../Components/FeaturedProducts'
@@ -8,7 +8,7 @@ import FeaturedProducts from '../Components/FeaturedProducts'
 
 
 import Catagories from '../Components/Catagories'
-
+import {UserContext} from '../context/UserContext'
 
 
 
@@ -28,6 +28,7 @@ state = {
     
   };
 const HomeScreen= () =>{
+  const {userprofile}= useContext(UserContext)
   const[index,setIndex]=useState({})
   console.log(index)
     return(
@@ -39,7 +40,7 @@ const HomeScreen= () =>{
                 <View style={ {elevation: 6,}}>
                 <Catagories/>
                 </View>
-               
+               {/* <Text>{}</Text> */}
                 <Text>{state.desc[index]}</Text>
                  <SliderBox images={state.images}
                  autoplayDelay={100000}

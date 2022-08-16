@@ -26,7 +26,7 @@ export const GroceryProvider = ({ children }) => {
   /* const cartContext = React.useMemo(()=>({ */
   const getItems = async() => {
    await axios
-      .get("http://192.168.1.12:5000/api/items")
+      .get("http://192.168.1.10:5000/api/items")
       .then((res) => {
         console.log('res')
         dispatch({
@@ -40,7 +40,7 @@ export const GroceryProvider = ({ children }) => {
   const addItems = (product, cls, Price) => {
     console.log("gothere")
     axios
-      .post("http://192.168.1.12:5000/api/items", {
+      .post("http://192.168.1.10:5000/api/items", {
         product: product,
         cls: cls,
         Price: Price,
@@ -50,8 +50,7 @@ export const GroceryProvider = ({ children }) => {
   };
   const deleteItem = (id) => {
     axios
-
-      .delete(`http://192.168.1.12:5000/api/items/${id}`)
+      .delete(`http://192.168.1.10:5000/api/items/${id}`)
       .then((res) => dispatch({ type: DELETE_ITEM, payload: id }))
       .catch(console.log(id));
   };

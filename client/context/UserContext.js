@@ -14,6 +14,7 @@ export const UserContext = React.createContext({
     ], 
   
   login: (email,password) => {},
-  register:(name,email,role,password) =>{}
+  register:(name,email,role,password) =>{},
+  setToken:()=>{}
  
 });
